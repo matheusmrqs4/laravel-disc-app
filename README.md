@@ -1,10 +1,10 @@
 # Discord APP
 
-- [ ] Authentication
+- [x] Authentication
     - [x] Exceptions
     - [x] Requests
     - [x] Routes
-    - [ ] Frontend
+    - [x] Frontend
 
 - [ ] Guilds
     - [ ] Exceptions

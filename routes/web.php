@@ -9,6 +9,6 @@ Route::get('/', function () {
 
 Route::get('/login', [AuthenticationController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthenticationController::class, 'login'])->name('login.post');
-Route::get('/register', [AuthenticationController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', [AuthenticationController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthenticationController::class, 'register'])->name('register.post');
 Route::middleware('auth:web')->post('/logout', [AuthenticationController::class, 'logout'])->name('logout');

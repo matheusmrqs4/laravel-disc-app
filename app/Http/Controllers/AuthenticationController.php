@@ -23,7 +23,7 @@ class AuthenticationController extends Controller
      */
     public function showRegistrationForm(): View
     {
-        //TODO: retornar view de formulario de registro!
+        return view('auth.register');
     }
 
     /**
@@ -47,7 +47,7 @@ class AuthenticationController extends Controller
      */
     public function showLoginForm(): View
     {
-        //TODO: retornar view de formulario de login!
+        return view('auth.login');
     }
 
     /**
