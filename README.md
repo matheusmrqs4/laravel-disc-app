@@ -13,10 +13,10 @@
     - [x] Routes
     - [x] Frontend
 
-- [ ] Channels
+- [x] Channels
     - [x] Exceptions
     - [x] Requests
-    - [ ] Event - UserJoined
+    - [x] Event - UserJoined
     - [x] Routes
     - [x] Frontend
 
