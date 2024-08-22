@@ -26,7 +26,7 @@
                         </p>
                     </div>
                     <div class="p-3 border-top">
-                        {{-- chat form here --}}
+                        <x-chat-form/>
                     </div>
                 </div>
             </div>

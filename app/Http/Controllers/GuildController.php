@@ -69,9 +69,9 @@ class GuildController extends Controller
      * Show the form for editing the specified resource.
      * @return View
      */
-    public function edit(): View
+    public function edit(Guild $guild): View
     {
-        return view('guilds.update-guild');
+        return view('guilds.update-guild', compact('guild'));
     }
 
     /**

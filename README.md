@@ -20,13 +20,13 @@
     - [x] Routes
     - [x] Frontend
 
-- [ ] Messages
+- [x] Messages
     - [x] Exceptions
     - [x] Requests
-    - [ ] Event - SendMessage
-    - [ ] Event - DeletedMessage
+    - [x] Event - SendMessage
+    - [x] Event - DeletedMessage
     - [x] Routes
-    - [ ] Frontend
+    - [x] Frontend
 
 - [ ] Tests
     - [ ] Test Authentication

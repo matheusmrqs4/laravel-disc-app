@@ -14,6 +14,20 @@
                             Join Guild
                         </a>
                     </div>
+
+                    @if(auth()->user()->hasRole('Admin'))
+                        <div class="p-1 mt-2">
+                            <a href="{{ route('guilds.edit', $guild->id) }}" class="btn btn-info">
+                                Update Guild
+                            </a>
+                        </div>
+
+                        <div class="p-1 mt-2">
+                            <a href="{{ route('guilds.show', $guild->id) }}" class="btn btn-danger">
+                                Delete Guild
+                            </a>
+                        </div>
+                    @endif
                 </li>
             @endforeach
         </ul>
