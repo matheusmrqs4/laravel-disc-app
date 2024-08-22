@@ -17,6 +17,7 @@ class GuildController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
      * @return View
      */
     public function index(): View
@@ -27,6 +28,7 @@ class GuildController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
      * @return View
      */
     public function create(): View
@@ -35,6 +37,7 @@ class GuildController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
      * @param CreateGuildRequest $request
      * @return RedirectResponse
      */
@@ -49,17 +52,21 @@ class GuildController extends Controller
     }
 
     /**
+     * Display the specified resource.
      * @param Guild $guild
      * @return View
+     * @throws \App\Exceptions\GuildException
      */
     public function show(Guild $guild): View
     {
         $guild = $this->guildService->getGuildById($guild);
+        $channels = $this->guildService->getAllGuildChannels($guild);
 
-        return view('guilds.show-guild', compact('guild'));
+        return view('guilds.show-guild', compact('guild', 'channels'));
     }
 
     /**
+     * Show the form for editing the specified resource.
      * @return View
      */
     public function edit(): View
@@ -68,6 +75,7 @@ class GuildController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
      * @param UpdateGuildRequest $request
      * @param Guild $guild
      * @return RedirectResponse
@@ -84,6 +92,7 @@ class GuildController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
      * @param Guild $guild
      * @return View
      * @throws \App\Exceptions\GuildException

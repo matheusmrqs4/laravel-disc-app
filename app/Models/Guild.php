@@ -29,4 +29,9 @@ class Guild extends Model
         return $this->belongsToMany(User::class, 'members')
                 ->withPivot(['role']);
     }
+
+    public function channels(): HasMany
+    {
+        return $this->hasMany(Channel::class, 'guild_id');
+    }
 }

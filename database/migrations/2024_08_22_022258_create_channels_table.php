@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('channels', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->foreignId('guild_id')->constrained('guilds')->cascadeOnDelete();
             $table->timestamps();
         });
     }

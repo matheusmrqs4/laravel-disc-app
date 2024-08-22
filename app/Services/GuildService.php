@@ -34,6 +34,20 @@ class GuildService
     }
 
     /**
+     * @param Guild $guild
+     * @return Collection
+     * @throws GuildException
+     */
+    public function getAllGuildChannels(Guild $guild): Collection
+    {
+        if (!Gate::allows('view', $guild)) {
+            throw GuildException::dontHavePermission();
+        }
+
+        return $guild->channels()->get();
+    }
+
+    /**
      * @param array $attributes
      * @return Guild
      */
