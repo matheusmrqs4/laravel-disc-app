@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserJoinedChannelEvent;
 use App\Http\Requests\CreateChannelRequest;
 use App\Http\Requests\UpdateChannelRequest;
 use App\Models\Channel;
@@ -58,7 +59,7 @@ class ChannelController extends Controller
     {
         $user = auth()->user();
 
-        //TODO: dispatch UserJoinedChannelEvent here
+        event(new UserJoinedChannelEvent($channel, $user));
 
         return view('guilds.channels.show-channel', [
             'channel' => $channel,

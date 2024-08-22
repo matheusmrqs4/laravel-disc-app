@@ -2,24 +2,26 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
+use App\Models\Channel;
+use App\Models\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserJoinedChannelEvent
+class UserJoinedChannelEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct(
+        private readonly Channel $channel,
+        private readonly User $user
+    )
     {
-        //
     }
 
     /**
@@ -30,7 +32,26 @@ class UserJoinedChannelEvent
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('channel-name'),
+            new PresenceChannel('channel.' . $this->channel->getKey()),
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function broadcastWith(): array
+    {
+        return [
+            'id' => $this->user->id,
+            'name' => $this->user->name,
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function broadcastAs(): string
+    {
+        return 'user-joined';
     }
 }
