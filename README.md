@@ -29,7 +29,7 @@
     - [x] Frontend
 
 - [ ] Tests
-    - [ ] Test Authentication
+    - [x] Test Authentication
     - [ ] Test Guilds
     - [ ] Test Channels
     - [ ] Test Messages

@@ -48,7 +48,13 @@ class AuthenticationService
      */
     public function logoutUser(): void
     {
-        Auth::user()->tokens()->delete();
+        $user = Auth::user();
+
+        if ($user) {
+            $user->tokens()->delete();
+        }
+
+        Auth::logout();
     }
 
     /**
