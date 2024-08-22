@@ -21,11 +21,11 @@
     - [x] Frontend
 
 - [ ] Messages
-    - [ ] Exceptions
-    - [ ] Requests
+    - [x] Exceptions
+    - [x] Requests
     - [ ] Event - SendMessage
     - [ ] Event - DeletedMessage
-    - [ ] Routes
+    - [x] Routes
     - [ ] Frontend
 
 - [ ] Tests
