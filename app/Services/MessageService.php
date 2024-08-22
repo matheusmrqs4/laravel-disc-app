@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Events\DeleteMessageEvent;
+use App\Events\SendMessageEvent;
 use App\Exceptions\MessageException;
 use App\Models\Channel;
 use App\Models\Guild;
@@ -32,7 +34,7 @@ class MessageService
 
         $message = $channel->messages()->create($payload);
 
-        //TODO: call SendMessageEvent
+        event(new SendMessageEvent($message));
 
         return $message;
     }
@@ -47,7 +49,7 @@ class MessageService
             throw MessageException::dontHavePermission();
         }
 
-        //TODO: call DeleteMessageEvent
+        event(new DeleteMessageEvent($message));
 
         $message->delete();
     }
