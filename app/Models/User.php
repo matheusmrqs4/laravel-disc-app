@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -44,5 +45,36 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function guilds(): BelongsToMany
+    {
+        return $this->belongsToMany(Guild::class, 'members')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    /**
+     * @param string $role
+     * @param Guild|null $guild
+     * @return bool
+     */
+    public function hasRole(string $role, Guild $guild = null): bool
+    {
+        $query = $this->guilds();
+
+        if ($guild) {
+            $query->where('guild_id', $guild->id);
+        }
+
+        return $query->wherePivot('role', $role)->exists();
+    }
+
+    public function isNotMemberOf(Guild $guild): bool
+    {
+        return !$this->guilds->contains($guild);
     }
 }

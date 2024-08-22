@@ -6,12 +6,12 @@
     - [x] Routes
     - [x] Frontend
 
-- [ ] Guilds
-    - [ ] Exceptions
-    - [ ] Requests
-    - [ ] Members
-    - [ ] Routes
-    - [ ] Frontend
+- [x] Guilds
+    - [x] Exceptions
+    - [x] Requests
+    - [x] Members
+    - [x] Routes
+    - [x] Frontend
 
 - [ ] Channels
     - [ ] Exceptions
