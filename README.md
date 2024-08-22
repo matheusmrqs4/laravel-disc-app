@@ -14,11 +14,11 @@
     - [x] Frontend
 
 - [ ] Channels
-    - [ ] Exceptions
-    - [ ] Requests
+    - [x] Exceptions
+    - [x] Requests
     - [ ] Event - UserJoined
-    - [ ] Routes
-    - [ ] Frontend
+    - [x] Routes
+    - [x] Frontend
 
 - [ ] Messages
     - [ ] Exceptions
