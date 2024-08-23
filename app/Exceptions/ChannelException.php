@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Exceptions;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 use Exception;
@@ -21,5 +22,16 @@ class ChannelException extends Exception
             'Member does not have permission to manage channels.',
             Response::HTTP_UNAUTHORIZED,
         );
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function render(): JsonResponse
+    {
+        return response()
+            ->json([
+                'message' => $this->getMessage(),
+            ], $this->getCode());
     }
 }

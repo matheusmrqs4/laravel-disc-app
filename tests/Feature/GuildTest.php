@@ -87,7 +87,7 @@ class GuildTest extends TestCase
 
         $response = $this->put(route('guilds.update', $guild->id), $guildData);
 
-        $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function test_user_with_admin_role_can_delete_guild()
@@ -115,6 +115,6 @@ class GuildTest extends TestCase
 
         $response = $this->delete(route('guilds.destroy', $guild->id));
 
-        $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 }

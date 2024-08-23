@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Exceptions;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 use Exception;
@@ -19,7 +20,18 @@ class GuildException extends Exception
     {
         return new self(
             'Member does not have permission.',
-            Response::HTTP_INTERNAL_SERVER_ERROR,
+            Response::HTTP_UNAUTHORIZED,
         );
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function render(): JsonResponse
+    {
+        return response()
+            ->json([
+                'message' => $this->getMessage(),
+            ], $this->getCode());
     }
 }
