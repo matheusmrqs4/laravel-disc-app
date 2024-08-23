@@ -31,6 +31,6 @@
 - [ ] Tests
     - [x] Test Authentication
     - [x] Test Guilds
-    - [ ] Test Channels
+    - [x] Test Channels
     - [ ] Test Messages
 
