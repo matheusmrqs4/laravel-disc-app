@@ -86,19 +86,19 @@ class ChannelController extends Controller
      * @param UpdateChannelRequest $request
      * @param Guild $guild
      * @param Channel $channel
-     * @return View
+     * @return RedirectResponse
      * @throws \App\Exceptions\ChannelException
      */
-    public function update(UpdateChannelRequest $request, Guild $guild, Channel $channel): View
+    public function update(UpdateChannelRequest $request, Guild $guild, Channel $channel): RedirectResponse
     {
         $data = $request->validated();
 
         $channelData = $this->channelService->updateChannel($data, $channel);
 
-        return view('guilds.channels.show-channel', [
-            'channel' => $channelData,
-            'guild' => $guild,
-        ]);
+        return redirect()->route('channels.show', [
+            'guild' => $guild->id,
+            'channel' => $channelData->id,
+        ])->with('success', 'Channel updated successfully!');
     }
 
     /**

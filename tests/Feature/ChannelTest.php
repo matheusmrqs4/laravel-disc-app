@@ -55,4 +55,93 @@ class ChannelTest extends TestCase
 
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
+
+    public function test_user_with_admin_role_can_update_a_channel()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $guild = Guild::factory()->create(['user_id' => $user->id]);
+
+        $guild->members()->attach($user->id, ['role' => 'Admin']);
+
+        $channel = Channel::factory()->create(['guild_id' => $guild->id]);
+
+        $updateChannelData = [
+            'name' => 'Channel Update',
+            'description' => 'Channel Description Update'
+        ];
+
+        $response = $this->put(route('channels.update', [
+            'guild' => $guild->id,
+            'channel' => $channel->id,
+        ]), $updateChannelData);
+
+        $response->assertRedirect(route('channels.show', [
+            'guild' => $guild->id,
+            'channel' => $channel->id,
+        ]));
+
+        $this->assertDatabaseHas('channels', [
+            'id' => $channel->id,
+            'name' => $updateChannelData['name'],
+            'description' => $updateChannelData['description'],
+        ]);
+    }
+
+    public function test_user_without_admin_role_cannot_update_a_channel()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $guild = Guild::factory()->create(['user_id' => $user->id]);
+
+        $guild->members()->attach($user->id, ['role' => 'Member']);
+
+        $channel = Channel::factory()->create(['guild_id' => $guild->id]);
+
+        $updateChannelData = [
+            'name' => 'Channel Update',
+            'description' => 'Channel Description Update'
+        ];
+
+        $response = $this->put(route('channels.update', [
+            'guild' => $guild->id,
+            'channel' => $channel->id,
+        ]), $updateChannelData);
+
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+    }
+
+    public function test_user_with_admin_role_can_delete_a_channel()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $guild = Guild::factory()->create(['user_id' => $user->id]);
+
+        $guild->members()->attach($user->id, ['role' => 'Admin']);
+
+        $channel = Channel::factory()->create(['guild_id' => $guild->id]);
+
+        $response = $this->delete(route('channels.delete', ['guild' => $guild->id, 'channel' => $channel->id]));
+
+        $response->assertRedirect(route('guilds.show', ['guild' => $guild->id]));
+    }
+
+    public function test_user_without_admin_role_cannot_delete_a_channel()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $guild = Guild::factory()->create(['user_id' => $user->id]);
+
+        $guild->members()->attach($user->id, ['role' => 'Member']);
+
+        $channel = Channel::factory()->create(['guild_id' => $guild->id]);
+
+        $response = $this->delete(route('channels.delete', ['guild' => $guild->id, 'channel' => $channel->id]));
+
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+    }
 }
