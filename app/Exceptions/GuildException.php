@@ -19,7 +19,7 @@ class GuildException extends Exception
     {
         return new self(
             'Member does not have permission.',
-            Response::HTTP_UNAUTHORIZED,
+            Response::HTTP_INTERNAL_SERVER_ERROR,
         );
     }
 }

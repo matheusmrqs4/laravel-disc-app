@@ -92,15 +92,15 @@ class GuildController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
      * @param Guild $guild
-     * @return View
+     * @return RedirectResponse
      * @throws \App\Exceptions\GuildException
      */
-    public function destroy(Guild $guild): View
+    public function destroy(Guild $guild): RedirectResponse
     {
         $this->guildService->deleteGuild($guild);
 
-        return view('guilds.get-guilds', compact('guild'));
+        return redirect()->route('guilds.index')
+            ->with('success', 'Guild deleted successfully!');
     }
 }

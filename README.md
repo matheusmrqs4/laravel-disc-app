@@ -30,7 +30,7 @@
 
 - [ ] Tests
     - [x] Test Authentication
-    - [ ] Test Guilds
+    - [x] Test Guilds
     - [ ] Test Channels
     - [ ] Test Messages
 

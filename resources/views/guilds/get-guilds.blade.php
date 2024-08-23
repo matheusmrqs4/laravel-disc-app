@@ -14,7 +14,6 @@
                             Join Guild
                         </a>
                     </div>
-
                     @if(auth()->user()->hasRole('Admin'))
                         <div class="p-1 mt-2">
                             <a href="{{ route('guilds.edit', $guild->id) }}" class="btn btn-info">
@@ -22,11 +21,13 @@
                             </a>
                         </div>
 
-                        <div class="p-1 mt-2">
-                            <a href="{{ route('guilds.show', $guild->id) }}" class="btn btn-danger">
+                        <form action="{{ route('guilds.destroy', $guild->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">
                                 Delete Guild
-                            </a>
-                        </div>
+                            </button>
+                        </form>
                     @endif
                 </li>
             @endforeach
