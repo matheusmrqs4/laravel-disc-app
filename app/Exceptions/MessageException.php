@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class MessageException extends Exception
@@ -21,5 +22,16 @@ class MessageException extends Exception
             'Member does not have permission to manage messages.',
             Response::HTTP_UNAUTHORIZED,
         );
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function render(): JsonResponse
+    {
+        return response()
+            ->json([
+                'message' => $this->getMessage(),
+            ], $this->getCode());
     }
 }
