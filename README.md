@@ -1,36 +1,50 @@
 # Discord APP
 
-- [x] Authentication
-    - [x] Exceptions
-    - [x] Requests
-    - [x] Routes
-    - [x] Frontend
+<hr>
+Criação de uma Aplicação de Chat em tempo real (discord clone), que permite usuários criar Guilds (servers) Channels (canais de chat) e enviar mensagens. Com um sistema de roles que diferencia "Admin" - que permite gerenciar Guilds, Channels e deletar mensagens de outros usuários - e "Member" - que permite acessar guilds e channels, enviar e deletar mensagens.
 
-- [x] Guilds
-    - [x] Exceptions
-    - [x] Requests
-    - [x] Members
-    - [x] Routes
-    - [x] Frontend
+<hr>
 
-- [x] Channels
-    - [x] Exceptions
-    - [x] Requests
-    - [x] Event - UserJoined
-    - [x] Routes
-    - [x] Frontend
+## Stack
+Laravel, MySQL  e Laravel Reverb para implementação dos Websockets.
 
-- [x] Messages
-    - [x] Exceptions
-    - [x] Requests
-    - [x] Event - SendMessage
-    - [x] Event - DeletedMessage
-    - [x] Routes
-    - [x] Frontend
+<hr>
 
-- [ ] Tests
-    - [x] Test Authentication
-    - [x] Test Guilds
-    - [ ] Test Channels
-    - [ ] Test Messages
+## Como rodar o projeto:
+1. Clone o repositório:
+```
+git clone https://github.com/matheusmrqs4/laravel-disc-app
+```
 
+2. Entre no diretório:
+
+```
+cd your-repo
+```
+
+3. Instale as dependências:
+```
+composer install
+
+npm run build
+```
+
+4. Crie um arquivo .env e preencha os dados:
+```
+cp .env.example .env
+```
+
+5. Gere uma nova chave da aplicação:
+```
+php artisan key:generate
+```
+
+6. Inicie o servidor:
+```
+php artisan serve
+```
+
+7. Inicie o Laravel Reverb:
+```
+php artisan reverb:start
+```

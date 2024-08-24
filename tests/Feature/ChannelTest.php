@@ -2,11 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Events\UserJoinedChannelEvent;
 use App\Models\Channel;
 use App\Models\Guild;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
@@ -144,4 +146,32 @@ class ChannelTest extends TestCase
 
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
+
+    public function test_event_dispatched_when_user_joins_channel()
+    {
+        Event::fake();
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $guild = Guild::factory()->create(['user_id' => $user->id]);
+        $guild->members()->attach($user->id, ['role' => 'Member']);
+
+        $channel = Channel::factory()->create(['guild_id' => $guild->id]);
+
+        $response = $this->get(route('channels.show', [
+            'guild' => $guild->id,
+            'channel' => $channel->id,
+        ]));
+
+        Event::assertDispatched(UserJoinedChannelEvent::class, function ($event) use ($channel, $user) {
+            return $event->broadcastWith() === [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                ];
+        });
+
+        $response->assertStatus(Response::HTTP_OK);
+    }
+
 }

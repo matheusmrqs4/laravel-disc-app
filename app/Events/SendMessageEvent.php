@@ -22,6 +22,11 @@ class SendMessageEvent implements ShouldBroadcastNow
         //
     }
 
+    public function getMessage(): Message
+    {
+        return $this->message;
+    }
+
     /**
      * Get the channels the event should broadcast on.
      *

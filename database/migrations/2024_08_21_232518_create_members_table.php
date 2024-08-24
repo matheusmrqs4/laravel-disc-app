@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->enum('role', GuildMemberRole::values());
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('guild_id')->constrained('guilds')->cascadeOnDelete();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('guild_id')->references('id')->on('guilds')->onDelete('cascade');
             $table->timestamps();
         });
     }

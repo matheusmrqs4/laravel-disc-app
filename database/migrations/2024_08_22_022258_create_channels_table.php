@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->foreignId('guild_id')->constrained('guilds')->cascadeOnDelete();
+            $table->foreignId('guild_id')->references('id')->on('guilds')->onDelete('cascade');
             $table->timestamps();
         });
     }

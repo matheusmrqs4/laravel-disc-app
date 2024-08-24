@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Channel;
+use App\Models\Guild;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Message>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Member>
  */
-class MessageFactory extends Factory
+class MemberFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,9 +19,9 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            'content' => $this->faker->text(),
-            'channel_id' => Channel::factory(),
-            'member_id' => User::factory(),
+            'guild_id' => Guild::factory(),
+            'user_id' => User::factory(),
+            'role' => $this->faker->randomElement(['Admin', 'Member']),
         ];
     }
 }
