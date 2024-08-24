@@ -2,7 +2,6 @@
 
 <hr>
 Criação de uma Aplicação de Chat em tempo real (discord clone), que permite usuários criar Guilds (servers) Channels (canais de chat) e enviar mensagens. Com um sistema de roles que diferencia "Admin" - que permite gerenciar Guilds, Channels e deletar mensagens de outros usuários - e "Member" - que permite acessar guilds e channels, enviar e deletar mensagens.
-
 <hr>
 
 ## Stack
